@@ -11,7 +11,7 @@ import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
-import { IconButton, Alert, Snackbar, TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Box, Button, TextField, Container, Typography, Stack, Link, LinearProgress, Paper, Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText } from '@mui/material'
+import { Fab, IconButton, Alert, Snackbar, TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Box, Button, TextField, Container, Typography, Stack, Link, LinearProgress, Paper, Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import './App.css'
@@ -52,10 +52,7 @@ function App() {
             <TextField disabled={loading} label="Recipient Address" value={recipientAddress} onChange={(e) => setRecipientAddress(e.target.value)} />
             <TextField disabled={loading} label="Transfer Amount ETH" value={amount} onChange={(e) => setAmount(e.target.value)} />
           </Stack>
-          <Stack direction="row" spacing={2} sx={{ p: 2, alignItems: 'center', justifyContent: 'space-between' }}>
-            <Button onClick={send} disabled={loading}>Transfer</Button>
-            <Button color="success" onClick={logout}>Logout</Button>
-          </Stack>
+          <Button variant="outlined" onClick={send} disabled={loading} sx={{ margin: 2 }}>Transfer</Button>
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>Recent Transactions</AccordionSummary>
             <AccordionDetails>
@@ -106,6 +103,7 @@ function App() {
           }}>View detail</Button>}
         >Transaction Initialized</Alert>
       </Snackbar>
+      <Button onClick={logout} variant="outlined" sx={{ position: 'absolute', top: 16, right: 16 }}>logout</Button>
     </Container>
   )
 
