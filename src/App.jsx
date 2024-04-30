@@ -67,7 +67,7 @@ function App() {
             <Stack direction="row" spacing={2} sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
               <Button onClick={transfer} disabled={loading}>Transfer</Button>
               {etherscanLink && <Link href={etherscanLink} target="_blank" variant="inherit" color="inherit">view transaction status</Link>}
-              <Button color="secondary" onClick={logout}>Logout</Button>
+              <Button color="success" onClick={logout}>Logout</Button>
             </Stack>
           </Box>
         </Paper>
@@ -80,22 +80,25 @@ function App() {
               onChange={(e) => setPrivateKey(e.target.value)}
             />
           </Box>
-          <Box sx={{ p: 2 }}>
+          <Stack direction="row" spacing={2} sx={{ p: 2, alignItems: 'center', justifyContent: 'space-between' }}>
             <Button disabled={!privateKey} onClick={() => loadWallet(privateKey)}>
               Load Wallet
             </Button>
-          </Box>
+            <Button onClick={loadSampleWallet} color='success'>
+              Load Wallet with Sample Private Key
+            </Button>
+          </Stack>
         </Paper>
       }
     </Container>
   )
 
+  function loadSampleWallet() {
+    loadWallet('0x27391db49e88c3a1f1a2ccf67e18c088578f86c69a4e393bbbed42685adbe4b2');
+  }
 
 
   async function loadWallet(key) {
-    // const bytes = CryptoJS.AES.decrypt(key!, password())
-    // const privateKey = bytes.toString(CryptoJS.enc.Utf8)
-
     const wallet = new Wallet(key, provider)
     setWallet(wallet)
 
@@ -108,29 +111,6 @@ function App() {
 
     savePrivateKey(key)
   }
-
-  // function createWallet() {
-  //   const mnemonic = Wallet.createRandom().mnemonic
-  //   setPhrase(mnemonic!.phrase)
-
-  //   const wallet = HDNodeWallet.fromMnemonic(mnemonic!)
-
-  //   wallet.connect(provider)
-  //   setWallet(wallet)
-
-  //   encryptAndStorePrivateKey()
-
-  //   setStep((s) => s + 1)
-  // }
-
-  // function encryptAndStorePrivateKey(key) {
-  //   const encryptedPrivateKey = CryptoJS.AES.encrypt(
-  //     key,
-  //     password()
-  //   ).toString()
-
-  //   localStorage.setItem('encryptedPrivateKey', encryptedPrivateKey)
-  // }
 
   async function transfer() {
     try {
