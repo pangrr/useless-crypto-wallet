@@ -1,0 +1,30 @@
+{
+  "name": "ether-wallet",
+  "private": true,
+  "version": "0.0.0",
+  "homepage": "https://pangrr.github.io/ether-wallet/",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.2.1",
+    "gh-pages": "^6.1.1",
+    "vite": "^5.2.10"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/roboto": "^5.0.13",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/material": "^5.15.15",
+    "crypto-js": "^4.2.0",
+    "ethers": "^6.12.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}
