@@ -38,7 +38,7 @@ function App() {
   return (
     <Container maxWidth="md" sx={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       {wallet ?
-        <Paper>
+        <Paper sx={{ maxHeight: '100%' }}>
           <LinearProgress sx={{ opacity: loading ? 1 : 0 }} />
           <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ pl: 2, pr: 2, pt: 2 }}>
             <Typography gutterBottom variant="h5" component="div">Balance</Typography>
@@ -59,22 +59,22 @@ function App() {
               <TableContainer sx={{ maxHeight: 440 }}>
                 <Table stickyHeader>
                   <TableHead>
-                    <TableRow>
+                    <TableRow sx={{ height: 1}}>
                       <TableCell>Amount (ETH)</TableCell>
                       <TableCell>Time</TableCell>
-                      <TableCell>Direction</TableCell>
+                      <TableCell></TableCell>
                       <TableCell>Counter Party Address</TableCell>
-                      <TableCell><IconButton onClick={() => getRecentTransactions(wallet.address)}><RefreshIcon /></IconButton></TableCell>
+                      <TableCell><IconButton onClick={() => getRecentTransactions(wallet.address)} size='small'><RefreshIcon fontSize='inherit' /></IconButton></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {recentTransactions.map((t) => {
                       const isSend = t.from.toLowerCase() === wallet.address.toLowerCase()
                       return <TableRow onClick={() => showTransactionDetail(t)} hover key={t.hash} sx={{ cursor: 'pointer' }}>
-                        <TableCell>{`${formatEther(t.value)}`}</TableCell>
-                        <TableCell>{dayjs.unix(t.timeStamp).fromNow()}</TableCell>
-                        <TableCell>{isSend ? 'OUT' : 'IN'}</TableCell>
-                        <TableCell>{isSend ? t.to : t.from}</TableCell>
+                        <TableCell sx={{ color: `${isSend ? 'orange' : 'limegreen'}` }}>{`${isSend ? '-' : '+'}${formatEther(t.value)}`}</TableCell>
+                        <TableCell sx={{ color: 'lightgrey' }}>{dayjs.unix(t.timeStamp).fromNow()}</TableCell>
+                        <TableCell sx={{ color: 'grey' }}>{isSend ? 'to' : 'from'}</TableCell>
+                        <TableCell sx={{ color: 'lightgrey' }}>{isSend ? t.to : t.from}</TableCell>
                         <TableCell></TableCell>
                       </TableRow>
                     })}
@@ -103,7 +103,7 @@ function App() {
           }}>View detail</Button>}
         >Transaction Initialized</Alert>
       </Snackbar>
-      <Button onClick={logout} variant="outlined" sx={{ position: 'absolute', top: 16, right: 16 }}>logout</Button>
+      <Button onClick={logout} variant="outlined" sx={{ position: 'fixed', top: 16, right: 16 }}>logout</Button>
     </Container>
   )
 
