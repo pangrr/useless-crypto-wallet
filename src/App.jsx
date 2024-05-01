@@ -14,7 +14,6 @@ dayjs.extend(relativeTime)
 import { Fab, IconButton, Alert, Snackbar, TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Box, Button, TextField, Container, Typography, Stack, Link, LinearProgress, Paper, Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import RefreshIcon from '@mui/icons-material/Refresh'
-import './App.css'
 
 const etherscanApiKey = 'EJBAAEHYPM8Z1ETUW2J7V2AC4PZZZHX718'
 
