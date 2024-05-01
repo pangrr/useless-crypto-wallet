@@ -14,6 +14,7 @@ dayjs.extend(relativeTime)
 import { Fab, IconButton, Alert, Snackbar, TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Box, Button, TextField, Container, Typography, Stack, Link, LinearProgress, Paper, Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import RefreshIcon from '@mui/icons-material/Refresh'
+import GitHubIcon from '@mui/icons-material/GitHub'
 
 const etherscanApiKey = 'EJBAAEHYPM8Z1ETUW2J7V2AC4PZZZHX718'
 
@@ -92,7 +93,7 @@ function App() {
               }}>View detail</Button>}
             >Transaction Initialized</Alert>
           </Snackbar>
-          <Button onClick={logout} variant="outlined" sx={{ position: 'fixed', top: 16, right: 16 }}>logout</Button>
+          <Button onClick={logout} variant="outlined" sx={{ position: 'fixed', top: 32, right: 32 }}>logout</Button>
         </>
         :
         <Paper>
@@ -105,6 +106,7 @@ function App() {
           </Stack>
         </Paper>
       }
+    <Button onClick={() => window.open('https://github.com/pangrr/wallet', '_blank')}  sx={{ position: 'fixed', top: 24, left: 32 }} startIcon={<GitHubIcon/>}>source code</Button>
     </Container>
   )
 
