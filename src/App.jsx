@@ -47,6 +47,7 @@ function App() {
       <Container maxWidth="md" sx={{ height: 'calc(100vh - 96px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         {wallet ?
           <Paper sx={{ maxHeight: '100%' }}>
+            <Alert severity="info">Sepolia Testnet is used by this wallet</Alert>
             <LinearProgress sx={{ opacity: loading ? 1 : 0 }} />
             <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ pl: 2, pr: 2, pt: 2 }}>
               <Typography gutterBottom variant="h5" component="div">Balance</Typography>
@@ -104,9 +105,6 @@ function App() {
           </Paper>
         }
       </Container>
-      <Alert severity="info">
-        Sepolia Testnet is used by this wallet.
-      </Alert>
       <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} open={!!transactionInitialized} autoHideDuration={30000}>
         <Alert severity="success" sx={{ width: '100%' }}
           action={<Button color="inherit" size="small" onClick={() => {
