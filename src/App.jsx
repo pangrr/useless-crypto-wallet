@@ -1,7 +1,6 @@
 
 import { useState, useEffect } from 'react'
 import {
-  JsonRpcProvider,
   Wallet,
   formatEther,
   parseEther,
@@ -11,10 +10,11 @@ import CryptoJS from 'crypto-js'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 dayjs.extend(relativeTime)
-import { Fab, IconButton, Alert, Snackbar, TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Box, Button, TextField, Container, Typography, Stack, Link, LinearProgress, Paper, Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText } from '@mui/material'
+import { Fab, AppBar, Toolbar, IconButton, Alert, Snackbar, TableContainer, Table, TableHead, TableRow, TableBody, TableCell, Box, Button, TextField, Container, Typography, Stack, Link, LinearProgress, Paper, Accordion, AccordionSummary, AccordionDetails, List, ListItem, ListItemText } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import RefreshIcon from '@mui/icons-material/Refresh'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import ExitToAppIcon from '@mui/icons-material/ExitToApp'
 
 const etherscanApiKey = 'EJBAAEHYPM8Z1ETUW2J7V2AC4PZZZHX718'
 
@@ -36,9 +36,16 @@ function App() {
   }, []);
 
   return (
-    <Container maxWidth="md" sx={{ height: '100vh', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      {wallet ?
-        <>
+    <>
+      <AppBar color='blackBackground' enableColorOnDark>
+        <Toolbar variant="dense" sx={{ justifyContent: 'space-between' }}>
+          <Button onClick={() => window.open('https://github.com/pangrr/wallet', '_blank')} startIcon={<GitHubIcon />} color='inherit'>source code</Button>
+          {wallet && <Button color='inherit' onClick={exitWallet} startIcon={<ExitToAppIcon />} >exit wallet</Button>}
+        </Toolbar>
+      </AppBar>
+      <Toolbar variant="dense" />
+      <Container maxWidth="md" sx={{ height: 'calc(100vh - 96px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        {wallet ?
           <Paper sx={{ maxHeight: '100%' }}>
             <LinearProgress sx={{ opacity: loading ? 1 : 0 }} />
             <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ pl: 2, pr: 2, pt: 2 }}>
@@ -85,29 +92,27 @@ function App() {
               </AccordionDetails>
             </Accordion>
           </Paper>
-          <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} open={!!transactionInitialized} autoHideDuration={30000}>
-            <Alert severity="success" sx={{ width: '100%' }}
-              action={<Button color="inherit" size="small" onClick={() => {
-                showTransactionDetail(transactionInitialized)
-                setTransactionInitialized(null)
-              }}>View detail</Button>}
-            >Transaction Initialized</Alert>
-          </Snackbar>
-          <Button onClick={logout} variant="outlined" sx={{ position: 'fixed', top: 32, right: 32 }}>logout</Button>
-        </>
-        :
-        <Paper>
-          <Box sx={{ p: 2 }}>
-            <TextField label="Private Key" value={privateKey} onChange={(e) => setPrivateKey(e.target.value)} />
-          </Box>
-          <Stack direction="row" spacing={2} sx={{ p: 2, alignItems: 'center', justifyContent: 'space-between' }}>
-            <Button disabled={!privateKey} onClick={() => loadWallet(privateKey)}>Load Wallet</Button>
-            <Button onClick={loadSampleWallet} color='success'>Load Wallet with Sample Private Key</Button>
-          </Stack>
-        </Paper>
-      }
-    <Button onClick={() => window.open('https://github.com/pangrr/wallet', '_blank')}  sx={{ position: 'fixed', top: 24, left: 32 }} startIcon={<GitHubIcon/>}>source code</Button>
-    </Container>
+          :
+          <Paper>
+            <Box sx={{ p: 2 }}>
+              <TextField label="Private Key" value={privateKey} onChange={(e) => setPrivateKey(e.target.value)} />
+            </Box>
+            <Stack direction="row" spacing={2} sx={{ p: 2, alignItems: 'center', justifyContent: 'space-between' }}>
+              <Button disabled={!privateKey} onClick={() => loadWallet(privateKey)}>Load Wallet</Button>
+              <Button onClick={loadSampleWallet} color='success'>Load Wallet with Sample Private Key</Button>
+            </Stack>
+          </Paper>
+        }
+      </Container>
+      <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} open={!!transactionInitialized} autoHideDuration={30000}>
+        <Alert severity="success" sx={{ width: '100%' }}
+          action={<Button color="inherit" size="small" onClick={() => {
+            showTransactionDetail(transactionInitialized)
+            setTransactionInitialized(null)
+          }}>View detail</Button>}
+        >Transaction Initialized</Alert>
+      </Snackbar>
+    </>
   )
 
   function loadSampleWallet() {
@@ -150,7 +155,7 @@ function App() {
     setLoading(false);
   }
 
-  function logout() {
+  function exitWallet() {
     deletePrivateKey()
     setWallet(null)
   }
