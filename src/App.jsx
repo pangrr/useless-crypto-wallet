@@ -99,11 +99,14 @@ function App() {
             </Box>
             <Stack direction="row" spacing={2} sx={{ p: 2, alignItems: 'center', justifyContent: 'space-between' }}>
               <Button disabled={!privateKey} onClick={() => loadWallet(privateKey)}>Load Wallet</Button>
-              <Button onClick={loadSampleWallet} color='success'>Load Wallet with Sample Private Key</Button>
+              <Button onClick={loadSampleWallet}>Use Sample Private Key</Button>
             </Stack>
           </Paper>
         }
       </Container>
+      <Alert severity="info">
+        Sepolia Testnet is used by this wallet.
+      </Alert>
       <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }} open={!!transactionInitialized} autoHideDuration={30000}>
         <Alert severity="success" sx={{ width: '100%' }}
           action={<Button color="inherit" size="small" onClick={() => {
