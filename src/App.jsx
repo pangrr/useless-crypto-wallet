@@ -40,14 +40,15 @@ function App() {
       <AppBar color='darkerBackground' enableColorOnDark>
         <Toolbar variant="dense" sx={{ justifyContent: 'space-between' }}>
           <Button onClick={() => window.open('https://github.com/pangrr/wallet', '_blank')} startIcon={<GitHubIcon />} color='inherit'>source code</Button>
-          {wallet && <Button color='inherit' onClick={exitWallet} startIcon={<ExitToAppIcon />} >exit wallet</Button>}
+          <Alert severity="info">Sepolia Testnet is used by this wallet</Alert>
+          <Button sx={{ opacity: wallet ? 1 : 0 }} disabled={!wallet} color='inherit' onClick={exitWallet} startIcon={<ExitToAppIcon />} >exit wallet</Button>
         </Toolbar>
       </AppBar>
       <Toolbar variant="dense" />
       <Container maxWidth="md" sx={{ height: 'calc(100vh - 96px)', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         {wallet ?
           <Paper sx={{ maxHeight: '100%' }}>
-            <Alert severity="info">Sepolia Testnet is used by this wallet</Alert>
+            
             <LinearProgress sx={{ opacity: loading ? 1 : 0 }} />
             <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ pl: 2, pr: 2, pt: 2 }}>
               <Typography gutterBottom variant="h5" component="div">Balance</Typography>
