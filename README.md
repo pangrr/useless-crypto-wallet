@@ -1,1 +1,1 @@
-[demo](https://pangrr.github.io/wallet/)
+[demo](https://pangrr.github.io/useless-crypto-wallet)
