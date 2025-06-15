@@ -39,7 +39,7 @@ function App() {
     <>
       <AppBar color='darkerBackground' enableColorOnDark>
         <Toolbar variant="dense" sx={{ justifyContent: 'space-between' }}>
-          <Button onClick={() => window.open('https://github.com/pangrr/wallet', '_blank')} startIcon={<GitHubIcon />} color='inherit'>source code</Button>
+          <Button onClick={() => window.open('https://github.com/pangrr/useless-crypto-wallet', '_blank')} startIcon={<GitHubIcon />} color='inherit'>source code</Button>
           <Alert severity="info">Sepolia Testnet is used by this wallet</Alert>
           <Button sx={{ opacity: wallet ? 1 : 0 }} disabled={!wallet} color='inherit' onClick={exitWallet} startIcon={<ExitToAppIcon />} >exit wallet</Button>
         </Toolbar>
