@@ -1,8 +1,7 @@
 {
-  "name": "wallet",
+  "name": "useless-crypto-wallet",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://pangrr.github.io/wallet/",
   "type": "module",
   "scripts": {
     "dev": "vite",
